@@ -5,7 +5,6 @@ import org.jvnet.hk2.annotations.Service;
 
 import java.util.List;
 
-
 public interface ProductCategoryService {
     // 查找一个类目
     ProductCategory findOne(Integer categoryId);
