@@ -9,6 +9,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
@@ -48,10 +50,17 @@ public class OrderServiceImplTest {
 
     @Test
     public void findOne() {
+        String orderId = "154494950704674973";
+        OrderDTO result = orderService.findOne(orderId);
+        log.info("查询单个订单", result);
+        Assert.assertNotNull(result);
     }
 
     @Test
     public void findList() {
+        String openId = "123456";
+        Page<OrderDTO> result = orderService.findList(openId, new PageRequest(0 ,3));
+        Assert.assertNotEquals(0, result.getSize());
     }
 
     @Test

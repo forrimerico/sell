@@ -1,5 +1,6 @@
 package com.product.sell.sell.service.impl;
 
+import com.product.sell.sell.converter.OrderMasterToOrderDTO;
 import com.product.sell.sell.dao.OrderDetail;
 import com.product.sell.sell.dao.OrderMaster;
 import com.product.sell.sell.dao.ProductInfo;
@@ -18,6 +19,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -88,7 +90,8 @@ public class OrderServiceImpl implements OrderService {
         orderMasterRepository.save(orderMaster);
 //        4、扣库存
         // 获取 cartdto list 的 lambda 表达式方案
-        List<CartDTO> cartDTOList = orderDTO.getOrderDetailList().stream().map(e -> new CartDTO(e.getProductId(), e.getProductQuantity()))
+        List<CartDTO> cartDTOList = orderDTO.getOrderDetailList().stream().map(e ->
+                new CartDTO(e.getProductId(), e.getProductQuantity()))
                 .collect(Collectors.toList());
 
         productInfoService.decreaseStock(cartDTOList);
@@ -97,13 +100,31 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderDTO findOne(String orderId) {
-        return null;
+    public OrderDTO findOne(String orderId)
+    {
+        OrderDTO result = new OrderDTO();
+        OrderMaster orderMaster = orderMasterRepository.findOne(orderId);
+        if (orderMaster == null) {
+            throw new SellException(ResultEnum.ORDER_MASTER_ERR);
+        }
+
+        List<OrderDetail> orderDetailList = orderDetailRepository.findByOrderId(orderMaster.getOrderId());
+        if (orderDetailList == null) {
+            throw new SellException(ResultEnum.ORDER_DETAIL_ERR);
+        }
+        BeanUtils.copyProperties(orderMaster, result);
+        result.setOrderDetailList(orderDetailList);
+
+        return result;
     }
 
     @Override
-    public Page<OrderDTO> findList(String buyerOpenId, Pageable pageable) {
-        return null;
+    public Page<OrderDTO> findList(String buyerOpenId, Pageable pageable)
+    {
+       Page<OrderMaster> orderMasterPage = orderMasterRepository.findByBuyerOpenid(buyerOpenId, pageable);
+       List<OrderDTO> orderMasterList = OrderMasterToOrderDTO.convert(orderMasterPage.getContent());
+
+       return new PageImpl<OrderDTO>(orderMasterList, pageable, orderMasterPage.getTotalElements());
     }
 
     @Override
