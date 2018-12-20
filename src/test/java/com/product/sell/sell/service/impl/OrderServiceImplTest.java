@@ -2,6 +2,7 @@ package com.product.sell.sell.service.impl;
 
 import com.product.sell.sell.dao.OrderDetail;
 import com.product.sell.sell.dto.OrderDTO;
+import com.product.sell.sell.enums.OrderStatus;
 import com.product.sell.sell.util.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
@@ -65,6 +66,10 @@ public class OrderServiceImplTest {
 
     @Test
     public void cancle() {
+        String orderId = "154494950704674973";
+        OrderDTO result = orderService.findOne(orderId);
+        OrderDTO cancleResult = orderService.cancle(result);
+        Assert.assertEquals(OrderStatus.CANCEL.getCode(), cancleResult.getOrderStatus());
     }
 
     @Test

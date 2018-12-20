@@ -8,6 +8,9 @@ public enum ResultEnum {
     PRODUCT_STOCK_ERR(11, "商品库存不足"),
     ORDER_MASTER_ERR(12, "订单不存在"),
     ORDER_DETAIL_ERR(13, "订单详情不存在"),
+    ORDER_STATUS_ERR(14, "订单状态错误"),
+    UPDATE_STATUS_ERR(15, "订单状态更新失败"),
+    ORDER_DETAIL_EMPTY(16, "订单详情不存在")
     ;
 
     private Integer code;
