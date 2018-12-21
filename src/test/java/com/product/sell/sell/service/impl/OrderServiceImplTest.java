@@ -3,6 +3,7 @@ package com.product.sell.sell.service.impl;
 import com.product.sell.sell.dao.OrderDetail;
 import com.product.sell.sell.dto.OrderDTO;
 import com.product.sell.sell.enums.OrderStatus;
+import com.product.sell.sell.enums.PayStatus;
 import com.product.sell.sell.util.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
@@ -13,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -65,6 +67,7 @@ public class OrderServiceImplTest {
     }
 
     @Test
+    @Transactional
     public void cancle() {
         String orderId = "154494950704674973";
         OrderDTO result = orderService.findOne(orderId);
@@ -73,10 +76,20 @@ public class OrderServiceImplTest {
     }
 
     @Test
+    @Transactional
     public void finish() {
+        String orderId = "154494950704674973";
+        OrderDTO result = orderService.findOne(orderId);
+        OrderDTO cancleResult = orderService.finish(result);
+        Assert.assertEquals(OrderStatus.FINISHED.getCode(), cancleResult.getOrderStatus());
     }
 
     @Test
+    @Transactional
     public void paid() {
+        String orderId = "154494950704674973";
+        OrderDTO result = orderService.findOne(orderId);
+        OrderDTO cancleResult = orderService.paid(result);
+        Assert.assertEquals(PayStatus.SUCCESS.getCode(), cancleResult.getOrderStatus());
     }
 }
