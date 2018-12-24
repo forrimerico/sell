@@ -2,6 +2,8 @@ package com.product.sell.sell.VO;
 
 import lombok.Data;
 
+import java.util.ArrayList;
+
 @Data
 public class ResultVO<T> {
 

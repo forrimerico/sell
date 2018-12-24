@@ -1,6 +1,6 @@
 package com.product.sell.sell.controller;
 
-        import com.product.sell.sell.VO.ResultVO;
+import com.product.sell.sell.VO.ResultVO;
         import com.product.sell.sell.converter.OrderFormToOrderDTO;
         import com.product.sell.sell.dto.OrderDTO;
         import com.product.sell.sell.enums.ResultEnum;
@@ -59,6 +59,7 @@ public class BuyerOrderController {
     public ResultVO<List<OrderDTO>> list(@RequestParam("openid") String openid,
                                          @RequestParam(value = "page", defaultValue = "0") Integer page,
                                          @RequestParam(value = "size", defaultValue = "10") Integer size)
+    throws SellException
     {
         if (StringUtils.isEmpty(openid)) {
             log.error("【查询订单列表】OPENID为空！");
