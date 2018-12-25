@@ -12,7 +12,15 @@ spring:
 server:
   context-path: /sell
 
-wechat:
-  mpAppId: wx1f7498d200c2b733
-  mpAppSecret: 388b216d50e20be05975550a59c3cdd4
+# 这里是页面授权用的
+#wechat:
+#  mpAppId: wx1f7498d200c2b733
+#  mpAppSecret: 388b216d50e20be05975550a59c3cdd4
 
+# 这里是页面支付用的
+wechat:
+  mpAppId: wxd898fcb01713c658
+  mchId: 1483469312
+  mchKey: C5245D70627C1F8E9964D494B0735025
+  keyPath: E:\dev\product\sell-resource-code\doc\h5.p12 #证书文件的完整路径，证书下载：课程源码doc目录下的h5.p12
+  notifyUrl: http://forri.natapp1.cc/sell/pay/notify

@@ -28,7 +28,7 @@ public class WechatController {
     @GetMapping("authorize")
     public String authorize(@RequestParam("returnUrl") String url)
     {
-        // 配置 通过 WechatMpconfig
+        // 配置 通过 WechatMpconfig bean 的方式注入
         // 调用方法
         String urlJump = "http://forri.natapp1.cc/sell/wechat/userinfo";
         String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(urlJump, WxConsts.OAUTH2_SCOPE_BASE, URLEncoder.encode(url));
@@ -49,7 +49,6 @@ public class WechatController {
             log.error("微信网页授权失败！");
             throw new SellException(ResultEnum.WX_MP_ERROR.getCode(), e.getMessage());
         }
-
         String openId = wxMpOAuth2AccessToken.getAccessToken();
 
         return "redirect:" + returnUrl + "?openid="  + openId ;
