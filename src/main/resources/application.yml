@@ -4,7 +4,7 @@ spring:
     username: root
     password: 123456
 #    url: jdbc:mysql://192.168.43.97/sell?characterEncoding=utf-8&useSSL=false
-    url: jdbc:mysql://192.168.21.103/sell?characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://192.168.21.104/sell?characterEncoding=utf-8&useSSL=false
   jpa:
     show-sql: true
   jackson:
@@ -13,12 +13,11 @@ server:
   context-path: /sell
 
 # 这里是页面授权用的
-#wechat:
-#  mpAppId: wx1f7498d200c2b733
-#  mpAppSecret: 388b216d50e20be05975550a59c3cdd4
-
-# 这里是页面支付用的
 wechat:
+  mpAppId: wx1f7498d200c2b733
+  mpAppSecret: 388b216d50e20be05975550a59c3cdd4
+# 这里是页面支付用的
+wechatpay:
   mpAppId: wxd898fcb01713c658
   mchId: 1483469312
   mchKey: C5245D70627C1F8E9964D494B0735025

@@ -20,7 +20,7 @@ public class PayServiceImpl implements PayService {
     private final static String ORDER_NAME = "微信点餐";
 
     @Override
-    public void create(OrderDTO orderDTO) {
+    public PayResponse create(OrderDTO orderDTO) {
         PayRequest payRequest = new PayRequest();
         payRequest.setOpenid(orderDTO.getBuyerOpenid());
         payRequest.setOrderAmount(orderDTO.getOrderAmount().doubleValue());
@@ -30,5 +30,7 @@ public class PayServiceImpl implements PayService {
         log.info("支付参数：{}", JsonUtil.toJson(payRequest));
         PayResponse payResponse = bestPayService.pay(payRequest);
         log.info("支付结果:{}", JsonUtil.toJson(payResponse));
+
+        return payResponse;
     }
 }
