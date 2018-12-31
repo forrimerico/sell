@@ -16,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.AssertTrue;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -91,5 +92,13 @@ public class OrderServiceImplTest {
         OrderDTO result = orderService.findOne(orderId);
         OrderDTO cancleResult = orderService.paid(result);
         Assert.assertEquals(PayStatus.SUCCESS.getCode(), cancleResult.getOrderStatus());
+    }
+
+    @Test
+    public void list()
+    {
+        Page<OrderDTO> orderDTOList = orderService.findList(new PageRequest(0 ,3));
+//        Assert.assertNotEquals(0, orderDTOList.getTotalElements());
+        Assert.assertTrue("查询所有订单", orderDTOList.getTotalElements() > 0);
     }
 }

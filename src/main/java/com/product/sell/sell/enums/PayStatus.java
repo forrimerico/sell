@@ -3,7 +3,7 @@ package com.product.sell.sell.enums;
 import lombok.Getter;
 
 @Getter
-public enum PayStatus {
+public enum PayStatus implements CodeEnum{
 
     WAIT(0, "等待支付"),
     SUCCESS(1, "支付成功")
