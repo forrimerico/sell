@@ -9,9 +9,7 @@ import com.product.sell.sell.service.PayService;
 import jdk.nashorn.internal.objects.annotations.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
@@ -40,5 +38,14 @@ public class PayController {
         map.put("payResponse", payResponse);
         map.put("returnUrl", returnUrl);
         return new ModelAndView("pay/create", map);
+    }
+
+    @PostMapping("/notify")
+    public ModelAndView notify(@RequestBody String notifyData)
+    {
+        payService.notify(notifyData);
+
+        // 返回给微信处理结果
+        return new ModelAndView("pay/success");
     }
 }

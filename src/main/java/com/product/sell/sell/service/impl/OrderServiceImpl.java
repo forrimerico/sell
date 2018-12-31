@@ -13,6 +13,7 @@ import com.product.sell.sell.exception.SellException;
 import com.product.sell.sell.repositories.OrderDetailRepository;
 import com.product.sell.sell.repositories.OrderMasterRepository;
 import com.product.sell.sell.service.OrderService;
+import com.product.sell.sell.service.PayService;
 import com.product.sell.sell.service.ProductInfoService;
 import com.product.sell.sell.util.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -43,6 +44,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     OrderMasterRepository orderMasterRepository;
+
+    @Autowired
+    PayService payService;
 
     /**
      * 创建订单
@@ -162,7 +166,7 @@ public class OrderServiceImpl implements OrderService {
 
         // 若支付成功，则退款
         if (orderDTO.getPayStatus().equals(PayStatus.SUCCESS.getCode())) {
-            // TODO 退款
+            payService.refund(orderDTO);
         }
 
         return orderDTO;
