@@ -146,9 +146,10 @@ public class OrderServiceImpl implements OrderService {
             throw new SellException(ResultEnum.ORDER_STATUS_ERR);
         }
         // 修改订单状态 这里注意，要修改 orderDTO的状态，然后再把orderDTO拷贝给orderMaster去做存储
-        
         orderDTO.setOrderStatus(OrderStatus.CANCEL.getCode());
         BeanUtils.copyProperties(orderDTO, orderMaster);
+//        orderMaster.setOrderStatus(orderDTO.getOrderStatus().getCode());
+        // 这里orderStatus和payStatus拷贝不过来？
         OrderMaster updateResult = orderMasterRepository.save(orderMaster);
         if (updateResult == null) {
             log.error("【取消订单】更新失败，orderMaster={}", orderMaster);

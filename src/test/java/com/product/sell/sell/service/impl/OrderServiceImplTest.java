@@ -70,7 +70,7 @@ public class OrderServiceImplTest {
     @Test
     @Transactional
     public void cancle() {
-        String orderId = "154494950704674973";
+        String orderId = "154601195368383222";
         OrderDTO result = orderService.findOne(orderId);
         OrderDTO cancleResult = orderService.cancle(result);
         Assert.assertEquals(OrderStatus.CANCEL.getCode(), cancleResult.getOrderStatus());

@@ -48,13 +48,13 @@ public class OrderDTO {
     private List<OrderDetail> orderDetailList;
 
     @JsonIgnore
-    public OrderStatus getOrderStatus()
+    public OrderStatus getOrderStatusEnum()
     {
         return EnumUtil.getByCode(orderStatus, OrderStatus.class);
     }
 
     @JsonIgnore
-    public PayStatus getPayStatus()
+    public PayStatus getPayStatusEnum()
     {
         return EnumUtil.getByCode(payStatus, PayStatus.class);
     }
