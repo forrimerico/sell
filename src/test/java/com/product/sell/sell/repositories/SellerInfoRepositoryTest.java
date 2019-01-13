@@ -35,4 +35,12 @@ public class SellerInfoRepositoryTest {
         SellerInfo sellerInfo = sellerInfoRepository.findByOpenid(openid);
         Assert.assertNotEquals(null, sellerInfo);
     }
+
+    @Test
+    public void findByUsername()
+    {
+        String username = "admin";
+        SellerInfo sellerInfo = sellerInfoRepository.findByUsername(username);
+        Assert.assertNotNull(sellerInfo);
+    }
 }

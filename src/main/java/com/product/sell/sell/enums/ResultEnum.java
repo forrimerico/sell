@@ -16,7 +16,11 @@ public enum ResultEnum {
     PARAM_ERR(1, "参数不正确"),
     CART_EMPTY(18, "购物车为空"),
     WX_MP_ERROR(19, "微信公众账号错误"),
-    WXPAY_NOTIFY_MONEY_VERIFY_ERR(20, "微信支付异步通知金额校验不通过")
+    WXPAY_NOTIFY_MONEY_VERIFY_ERR(20, "微信支付异步通知金额校验不通过"),
+    USER_NOT_EXIST(21, "用户不存在"),
+    USER_PWD_ERROR(22, "用户密码错误"),
+    COOKIE_NOT_EXITS(23, "cookie不存在"),
+    REDIS_NOT_EXITS(24, "redis中查不到token")
     ;
 
     private Integer code;

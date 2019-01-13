@@ -10,6 +10,10 @@ spring:
     show-sql: true
   jackson:
     default-property-inclusion: non_null
+  redis:
+    host: 192.168.43.97
+    port: 6379
+
 server:
   context-path: /sell
 
@@ -24,3 +28,4 @@ wechatpay:
   mchKey: C5245D70627C1F8E9964D494B0735025
   keyPath: E:\dev\product\sell-resource-code\doc\h5.p12 #证书文件的完整路径，证书下载：课程源码doc目录下的h5.p12
   notifyUrl: http://forri.natapp1.cc/sell/pay/notify
+
